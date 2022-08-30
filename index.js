@@ -10,8 +10,8 @@ app.use(express.json())
 app.use(cors())
 app.use(morgan('tiny'))
 
-app.use('/article', getArticle)
-app.use('/category', getCategory)
+app.use('/articles', getArticle)
+app.use('/categories', getCategory)
 
 app.listen(port, () => {
     console.log(`Server is running on ${port}`);
