@@ -27,16 +27,16 @@ app.get('/:slug', checkIfExists, (req, res) => {
 
 
 app.post('/',
-    body('title').exists().withMessage('You have to add a title to your article'), 
+    body('title').isLength({ min: 2}).withMessage('Your title is too short'), 
     body('content').isLength({ min: 5}).withMessage('Your article is too short'),
-    body('author').exists().withMessage('You have to add an author'),
+    body('author').isLength({ min: 2}).withMessage('You have to add an author'),
     checkIfCatExist, checkIfNotExists,
     (req, res) => {
 
     const { errors } = validationResult(req)
 
     const article = { ...req.body,
-        date: moment().format(),
+        date: moment().format('MMMM Do YYYY, h:mm:ss'),
         slug: req.slug
     }
 
